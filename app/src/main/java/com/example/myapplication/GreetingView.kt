@@ -7,6 +7,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
+/**
+ * Displays a greeting message with the provided name.
+ *
+ * @param name The name to display in the greeting.
+ * @param modifier Modifier to be applied to the greeting text.
+ */
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(

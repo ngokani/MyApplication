@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,73 +33,81 @@ import androidx.compose.ui.unit.dp
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
-    private var displayName by mutableStateOf("Android")
-    private var enteredName by mutableStateOf("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                    val focusManager = LocalFocusManager.current
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            NameTextField()
-                            Spacer(modifier = Modifier.width(16.dp))
-                            UpdateButton(focusManager)
-                        }
-
-                        // On Windows, Ctrl + Click `Greeting`, to see where it is defined
-                        // On Mac, Cmd + Click `Greeting`, to see where it is defined
-                        Greeting(
-                            name = displayName, // Use the updated name
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
+                DisplayNameScreen()
             }
         }
     }
+}
 
-    @Composable
-    private fun NameTextField() {
-        val focusManager = LocalFocusManager.current
+@Composable
+fun DisplayNameScreen() {
+    var displayName by remember { mutableStateOf("Android") }
+    var enteredName by remember { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
 
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        NameInputRow(
+            enteredName = enteredName,
+            onNameChange = { enteredName = it },
+            onUpdateClick = {
+                displayName = enteredName.trim().ifEmpty { "Android" }
+                enteredName = ""
+                focusManager.clearFocus() // Clear focus after updating
+            },
+            focusManager = focusManager
+        )
+
+        // You can add multiple NameInputRow calls here,
+        // but they would function independently with their own state.
+        // Both, would update `Greeting`, below
+
+
+        // On Windows, Ctrl + Click `Greeting`, to see where it is defined
+        // On Mac, Cmd + Click `Greeting`, to see where it is defined
+        Greeting(
+            name = displayName,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
+@Composable
+fun NameInputRow(
+    enteredName: String,
+    onNameChange: (String) -> Unit,
+    onUpdateClick: () -> Unit,
+    focusManager: FocusManager
+) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         OutlinedTextField(
             value = enteredName,
-            onValueChange = { enteredName = it },
+            onValueChange = onNameChange,
             label = { Text(stringResource(R.string.name_label)) },
             placeholder = { Text(stringResource(R.string.enter_your_name_placeholder)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onNext = {
-                focusManager.moveFocus(FocusDirection.Right)
-            }, onDone = {
-                updateDisplayName()
-                focusManager.clearFocus()
-            })
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Right) },
+                onDone = { onUpdateClick() } // Call onUpdateName when Done is pressed
+            ),
+            modifier = Modifier.weight(1f)
         )
-    }
-
-    @Composable
-    private fun UpdateButton(focusManager: FocusManager) {
-        Button(onClick = {
-            updateDisplayName()
-            focusManager.clearFocus()
-        }) {
+        Spacer(modifier = Modifier.width(16.dp))
+        Button(onClick = onUpdateClick) { // Use onUpdateClick for the button click
             Text(text = stringResource(R.string.update_text))
         }
-    }
-
-    private fun updateDisplayName() {
-        displayName = enteredName.trim().ifEmpty { "Android" }
-        enteredName = ""
     }
 }
