@@ -13,18 +13,22 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
  * @param name The name to display in the greeting.
  * @param modifier Modifier to be applied to the greeting text.
  */
+// This composable function displays a greeting message.
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(name: String, modifier: Modifier = Modifier) {// Display the greeting text using the provided name and modifier.
     Text(
-        text = stringResource(R.string.hello_name_text, name),
-        modifier = modifier
+        text = stringResource(R.string.hello_name_text, name), // Formatted greeting text
+        modifier = modifier // Apply any provided modifiers for customization
     )
 }
 
-@Preview(showBackground = true)
+// This composable function provides a preview of the Greeting composable.
+@Preview(showBackground = true) // Show a background in the preview
 @Composable
 fun GreetingPreview() {
+    // Apply the app's theme to the preview.
     MyApplicationTheme {
+        // Display a Greeting with the name "Android".
         Greeting("Android")
     }
 }
