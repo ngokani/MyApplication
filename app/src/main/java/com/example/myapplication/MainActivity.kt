@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
     // This method is called when the activity is created. It's where you set up
     // the initial UI and perform any necessary setup.
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Call the superclass method to ensure proper initialization.
+        // Call the superclass method to ensure proper initialisation.
         super.onCreate(savedInstanceState)
 
         // Configure the activity to extend its layout to the edges of the screen.

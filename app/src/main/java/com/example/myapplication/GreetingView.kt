@@ -18,7 +18,7 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 fun Greeting(name: String, modifier: Modifier = Modifier) {// Display the greeting text using the provided name and modifier.
     Text(
         text = stringResource(R.string.hello_name_text, name), // Formatted greeting text
-        modifier = modifier // Apply any provided modifiers for customization
+        modifier = modifier // Apply any provided modifiers for customisation
     )
 }
 
