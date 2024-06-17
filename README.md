@@ -1,6 +1,26 @@
 # Android Development Starter Project
 This project is a simple Android application built with Jetpack Compose, designed to help beginners get started with Android development. It showcases basic concepts and best practices for building modern Android UIs.
 
+## Getting Started
+1. **Download and Install Android Studio:** If you don't have it already, download and install the latest version of Android Studio from the official website: [https://developer.android.com/studio](https://developer.android.com/studio) 
+2. **Clone the Repository:** Clone this repository to your local machine using Git:
+    ```
+    git clone https://github.com/ngokani/MyApplication.git
+    ```
+2.  **Open in Android Studio:** Open the project in Android Studio, which is the official IDE for Android development.
+3.  **Build and Run:** Build the project and run it on an Android emulator or a physical Android device connected to your computer. (You may need to follow the steps in [Run Configurations](#setting-up-run-configurations) below)
+
+## Setting Up Run Configurations
+This project may require you to set up run configurations in Android Studio to run the app. Since this is a fresh clone, you'll need to create one. Follow these steps:
+
+1. **Open Run Configurations:** Click the "Add Configuration" button in the toolbar (it looks like a dropdown with a green play icon).
+2. **Create New Configuration:** Select **Edit Configurations...** from the dropdown menu.
+3. **Add New Configuration:** In the "Run/Debug Configurations" dialog, click the **+** button and select **Android App**.
+4. **Configure:**
+    - **Name:** Give it a name like "app".
+    - **Module:** Select the "app" module.
+5. **Apply and Run:** Click **Apply** to save, then select your configuration from the dropdown in the toolbar and click the green **Run** button (which should now be available).
+
 ## Features
 *   **Jetpack Compose:** The entire UI is built using Jetpack Compose, a modern toolkit for building native Android UIs in a declarative way.
 *   **State Management:** Demonstrates how to manage UI state using `remember` and `mutableStateOf`.
@@ -29,14 +49,6 @@ Here's a breakdown of the key code files and components:
 *   **`res/mipmap`:** This directory is specifically for app launcher icons. It contains different versions of your app icon at various resolutions to support different screen densities. Android automatically selects the appropriate icon based on the device's screen density.
 *   **`AndroidManifest.xml`:** This file is the core configuration file for your Android app. It declares essential information about your app, such as its package name, components (activities, services, broadcast receivers, content providers), permissions, and hardware/software requirements. Understanding the `AndroidManifest.xml` is crucial for configuring how your app interacts with the Android system.
 *   **`Gradle Build Files`:** Gradle is the build system used for Android projects. The build files (typically `build.gradle` at the project and module level) define dependencies, build configurations, and other settings for your app. Learning the basics of Gradle is essential for managing external libraries and customizing the build process.
-
-## Getting Started
-1.  **Clone the Repository:** Clone this repository to your local machine using Git:
-    ```
-    git clone https://github.com/ngokani/MyApplication.git
-    ```
-2.  **Open in Android Studio:** Open the project in Android Studio, which is the official IDE for Android development.
-3.  **Build and Run:** Build the project and run it on an Android emulator or a physical Android device connected to your computer.
 
 ## Key Concepts for Beginners
 *   **Activities:** Activities represent single screens in your app. They are the primary way users interact with your application.
